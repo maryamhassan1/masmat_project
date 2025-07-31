@@ -4,9 +4,12 @@ import pydicom
 from PIL import Image
 from pydicom.uid import generate_uid
 
-dicom_folder = "/path/to/original_dicom"  # folder with the original DICOMs (used as templates)
-png_folder = "/path/to/png_folder"        # folder with the PNGs you want to convert
-output_folder = "/path/to/output_dicom_folder"  # where the new DICOMs will be saved
+# folder with the original DICOMs (used as templates)
+dicom_folder = "/path/to/original_dicom"  
+# folder with the PNGs you want to convert
+png_folder = "/path/to/png_folder" 
+# where the new DICOMs will be saved
+output_folder = "/path/to/output_dicom_folder"
 
 # create the output directory if it doesn't exist
 os.makedirs(output_folder, exist_ok=True)

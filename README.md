@@ -70,8 +70,8 @@ Install them with:
 ```bash
 pip install numpy pydicom Pillow matplotlib nibabel
 
-### MATLAB
-Requires the **NIfTI Toolbox**:
+```MATLAB
+Requires the NIfTI Toolbox:
 - Functions used: `load_nii`, `save_nii`
 
 

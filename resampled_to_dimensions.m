@@ -33,12 +33,20 @@ for k = 1:length(nii_files)
     nii = load_nii(input_path, '', '', '', '', '', 1);
 
     % resample the image to target dimensions
-    resampled_img = imresize3(nii.img, target_dim, 'nearest');
+    resampled_img = imresize3(nii.img, target_dim, 'linear');
 
     % update metadata and header information
     nii.img = resampled_img;
     nii.hdr.dime.dim(2:4) = target_dim;
     nii.hdr.dime.pixdim(2:4) = target_vox;
+
+    % copy orientation from reference
+    nii.hdr.hist.sform_code = ref.hdr.hist.sform_code;
+    nii.hdr.hist.qform_code = ref.hdr.hist.qform_code;
+    nii.hdr.hist.srow_x = ref.hdr.hist.srow_x;
+    nii.hdr.hist.srow_y = ref.hdr.hist.srow_y;
+    nii.hdr.hist.srow_z = ref.hdr.hist.srow_z;
+
 
     % save the new file
     save_nii(nii, output_path);

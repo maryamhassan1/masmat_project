@@ -23,10 +23,18 @@ for k = 1:length(nii_files)
 
     % swap Y and Z axes, then flip along the new Z-axis (slice axis)
     reoriented_img = permute(nii.img, [1 3 2]);
-    reoriented_img = flip(reoriented_img, 3);  % flip along slices
+     % flip along x axis, open in itksnap/volume viewer and see if it correct orientation. Adjust the number accordingly. 
+    reoriented_img = flip(reoriented_img, 1);  
 
-    % update image data
-    nii.img = reoriented_img;
+    % update header dimensions
+    nii.hdr.dime.dim(2:4) = size(nii.img);
+
+     % create output filename with _fixed suffix
+    [~, name, ~] = fileparts(filename);
+    if endsWith(name, '.nii')
+        name = extractBefore(name, '.nii');
+    end
+    output_path = fullfile(output_dir, [name '_fixed.nii.gz']);
 
     % save the updated NIfTI
     output_path = fullfile(output_dir, filename);
